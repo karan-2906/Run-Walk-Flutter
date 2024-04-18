@@ -1,5 +1,6 @@
 import 'dart:math';
-
+import 'package:sensors_plus/sensors_plus.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:runwalktrackermine/widgets/bottom_navigation.dart';
@@ -17,6 +18,30 @@ class CalendarPage extends StatefulWidget {
 
 class _CalendarPageState extends State<CalendarPage> {
   DateTime _selectedDate = DateTime.now();
+  StreamSubscription<AccelerometerEvent>? _accelerometerSubscription;
+  double _previousValue = 0.0;
+  int _stepCount = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _accelerometerSubscription =
+        accelerometerEvents.listen((AccelerometerEvent event) {
+      if ((_previousValue < 0 && event.y > 0) ||
+          (_previousValue > 0 && event.y < 0)) {
+        setState(() {
+          _stepCount++;
+        });
+      }
+      _previousValue = event.y;
+    });
+  }
+
+  @override
+  void dispose() {
+    _accelerometerSubscription?.cancel();
+    super.dispose();
+  }
 
   void _selectDate(DateTime date) {
     setState(() {
@@ -228,16 +253,22 @@ class _CalendarPageState extends State<CalendarPage> {
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '${_calculateTotalStepsForWeek()}',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.blue),
+                  '$_stepCount',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue),
                 ),
                 Text(
                   'Total Steps this Month:',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '${_calculateTotalStepsForMonth()}',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.blue),
+                  '$_stepCount',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue),
                 ),
               ],
             ),

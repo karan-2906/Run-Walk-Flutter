@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:runwalktrackermine/pages/Calendar/calendar.dart';
 import 'package:runwalktrackermine/pages/details/detail.dart';
 import 'package:runwalktrackermine/pages/home/home.dart';
+import 'package:sensors_plus/sensors_plus.dart';
+import 'dart:async';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,15 +19,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Rum Walk Tracker',
       theme: ThemeData(
-        fontFamily: 'Roboto',
-        textTheme: TextTheme(
-          headline1: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.w900,
-            color: Colors.black,
-          ),
-        )
-      ),
+          fontFamily: 'Roboto',
+          textTheme: TextTheme(
+            headline1: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w900,
+              color: Colors.black,
+            ),
+          )),
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => HomePage(),
