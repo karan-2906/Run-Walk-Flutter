@@ -14,12 +14,23 @@ class BottomNavigation extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Icon(Icons.add_chart),
+              Column(
+                children: [
+                  Icon(Icons.add_chart),
+                  Text('Stats', style: TextStyle(fontSize: 10)),
+                ],
+              ),
               GestureDetector(
                   onTap: () {
                     Navigator.of(context).pushNamed('/map');
                   },
-                  child: Icon(Icons.map)),
+                  child: Column(
+                    children: [
+                      Icon(Icons.map),
+                      Text('Map', style: TextStyle(fontSize: 10)),
+                    ],
+                  ),
+                  ),
               Transform.translate(
                 offset: Offset(0, -20),
                 child: GestureDetector(
@@ -44,9 +55,17 @@ class BottomNavigation extends StatelessWidget {
                               offset: Offset(3, 3),
                             )
                           ]),
-                      child: Icon(
-                        Icons.home,
-                        color: Colors.white,
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.home,
+                            color: Colors.white,
+                          ),
+                          // Text(
+                          //   'Home',
+                          //   style: TextStyle(color: Colors.white, fontSize:10 ),
+                          // )
+                        ],
                       )),
                 ),
               ),
@@ -54,12 +73,22 @@ class BottomNavigation extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).pushNamed('/calendar');
                   },
-                  child: Icon(Icons.date_range)),
+                  child: Column(
+                    children: [
+                      Icon(Icons.date_range),
+                      Text('Calendar', style: TextStyle(fontSize: 10)),
+                    ],
+                  )),
               GestureDetector(
                   onTap: () {
                     Navigator.of(context).pushNamed('/details');
                   },
-                  child: Icon(Icons.settings)),
+                  child: Column(
+                    children: [
+                      Icon(Icons.settings),
+                      Text('Settings', style: TextStyle(fontSize: 10)),
+                    ],
+                  )),
               
             ],
           ),
