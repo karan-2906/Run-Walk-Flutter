@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:runwalktrackermine/pages/Calendar/calendar.dart';
 import 'package:runwalktrackermine/pages/details/detail.dart';
 import 'package:runwalktrackermine/pages/home/home.dart';
+import 'package:runwalktrackermine/pages/map/map.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import 'dart:async';
 
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => HomePage(),
         '/details': (context) => DetailsPage(),
-        '/calendar': (context) => CalendarPage()
+        '/calendar': (context) => CalendarPage(),
+        '/map': (context) => Mappage(),
       },
       initialRoute: '/',
     );

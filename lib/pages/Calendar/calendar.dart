@@ -85,8 +85,8 @@ class _CalendarPageState extends State<CalendarPage> {
     DateTime startOfWeek =
         currentDate.subtract(Duration(days: currentDate.weekday - 1));
 
-    // Iterate over the days of the current week till the current date
-    for (int i = 0; i <= currentDate.weekday; i++) {
+    // Iterate over the days of the current week till the day before the current date
+    for (int i = 0; i < currentDate.weekday; i++) {
       final random = Random(startOfWeek.day + i);
       int steps =
           random.nextInt(3001) + 5000; // Random number between 5000 and 8000
@@ -225,7 +225,7 @@ class _CalendarPageState extends State<CalendarPage> {
                                   ),
                                 ),
                                 Text(
-                                  '$steps',
+                                  isToday ? '$_stepCount' : '$steps',
                                   style: TextStyle(
                                     color: isToday ? Colors.white : null,
                                     fontSize: 11,
@@ -249,7 +249,7 @@ class _CalendarPageState extends State<CalendarPage> {
             child: Column(
               children: [
                 Text(
-                  'Total Steps this Week:',
+                  'Total Steps Today:',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 Text(
@@ -260,11 +260,22 @@ class _CalendarPageState extends State<CalendarPage> {
                       color: Colors.blue),
                 ),
                 Text(
+                  'Total Steps this Week:',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  '${_calculateTotalStepsForWeek()}',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue),
+                ),
+                Text(
                   'Total Steps this Month:',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '$_stepCount',
+                  '${_calculateTotalStepsForMonth()}',
                   style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,

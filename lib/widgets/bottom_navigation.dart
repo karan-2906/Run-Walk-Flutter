@@ -15,7 +15,11 @@ class BottomNavigation extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Icon(Icons.add_chart),
-              Icon(Icons.search),
+              GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/map');
+                  },
+                  child: Icon(Icons.map)),
               Transform.translate(
                 offset: Offset(0, -20),
                 child: GestureDetector(
